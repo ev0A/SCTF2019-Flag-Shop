@@ -1,0 +1,66 @@
+<h1 style="text-align: center">Flag Shop</h1>
+
+Your uid is <b id="uid"></b>
+<br />
+Your JinKela is <b id="jkl"></b>
+<br />
+Flag Price: <b>1000000000000000000000000000</b>
+<hr />
+
+<button onclick="buyFlag()" style="text-align: left">buy flag</button>
+<button onclick="reset()" style="text-align: center">reset</button>
+<button onclick="work()" style="text-align: right">work</button>
+
+<script>
+    function buyFlag() {
+        fetch("/shop", {
+            method: 'POST', // or 'PUT'
+            headers: new Headers({
+                'Content-Type': 'application/x-www-form-urlencoded'
+            })
+        })
+            .then(res => res.text())
+
+            .then(function (response) {
+                    alert(response)
+                })
+
+            .catch(error =>alert(error))
+    }
+    function reset() {
+        if(confirm("This will reset all Jinkelas , Are U Sure?")){
+            fetch("/api/auth");
+            setTimeout(()=>window.location.reload(),500);
+        }
+    }
+    function work() {
+        fetch("/work?name=bot&do=bot is working")
+            .then(()=>window.location.reload());
+    }
+
+    fetch("/api/info",{
+            redirect: 'manual'
+        })
+        .then(function (res) {
+
+          if(res.ok){
+              return res.json()
+          }
+          else{
+              fetch("/api/auth")
+              reject;
+          }
+        })
+        .then(res=>{
+            var info = res;
+            console.log(info);
+            document.getElementById("uid").innerText = info.uid;
+            document.getElementById("jkl").innerText = info.jkl;
+        })
+        .catch(error => setTimeout(()=>window.location.reload(),500))
+
+
+
+
+</script>
+

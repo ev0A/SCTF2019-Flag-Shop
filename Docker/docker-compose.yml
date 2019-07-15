@@ -1,0 +1,13 @@
+version: "2"
+services:
+  sctf2019:
+    volumes:
+      - ./app:/app
+    build: .
+    restart: always
+    environment:
+      FLAG: "sctf{3rb_Ssti_dOl1ar_dO1lar_F4k3_JwT}"
+      SECRET: "ec55ce17b51f7f2588b3d2f09c821e6499984b09810e652ce9fa4882fe4875c8"
+      APP_ENV: "production"
+    ports:
+      - "80:4567"
